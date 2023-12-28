@@ -187,6 +187,7 @@ exports.getEnrolledCourses = async (req, res) => {
       });
     }
     console.log("userDetails", userDetails);
+     res.setHeader("Content-type", "application/json");
     return res.status(200).json({
       success: true,
       data: userDetails.courses,

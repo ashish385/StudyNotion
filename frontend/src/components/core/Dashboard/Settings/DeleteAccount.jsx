@@ -10,9 +10,10 @@ export default function DeleteAccount() {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [deleteAccount, setDeleteAccount] = useState(null);
+  const [deleteAccount, setDeleteAccount] = useState(false);
 
   async function handleDeleteAccount() {
+    // console.log("delete account");
     try {
       dispatch(deleteProfile(token, navigate));
     } catch (error) {
@@ -38,25 +39,43 @@ export default function DeleteAccount() {
             </p>
           </div>
           <button
-            type="button"
-            className="w-fit cursor-pointer italic text-pink-300"
-            // onClick={handleDeleteAccount}
-            onClick={() => {
-              setDeleteAccount({
-                text1: "Are You Sure ?",
-                text2: "You will not access  your Account in future",
-                btn1Text: "Delete",
-                btn2Text: "Cancel",
-                btn1Handler: () => handleDeleteAccount,
-                btn2Handler: () => setDeleteAccount(null),
-              });
-            }}
+            // type="button"
+            className="w-fit cursor-pointer italic text-pink-300 hover:underline"
+            onClick={() => setDeleteAccount(true)}
           >
             I want to delete my account.
           </button>
         </div>
       </div>
-      {deleteAccount && <ConfirmationsModal modalData={deleteAccount} />}
+      {/* {deleteAccount && <ConfirmationsModal modalData={deleteAccount} />} */}
+      {deleteAccount && (
+        <div>
+          <div className="absolute inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-hidden bg-white bg-opacity-10 backdrop-blur-sm">
+            <div className="absolute top-1/4 bg-richblack-800 shadow-2xl  text-richblack-5 px-4 py-4 rounded-md">
+              <p className="text-2xl text-center mt-3 italic ">
+                Are you want delete your Account?
+              </p>
+              <p className="text-richblack-300 text-center mt-2">
+                You will not access in the future.
+              </p>
+              <div className="flex gap-3 mt-3 justify-evenly">
+                <button
+                  onClick={handleDeleteAccount}
+                  className="bg-yellow-200 text-black px-3 py-2 rounded-lg font-semibold"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={() => setDeleteAccount(false)}
+                  className="b bg-richblack-500 text-richblack-100 px-3 py-2 rounded-lg font-semibold hover:text-white"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ const CourseProgress = require("../models/CourseProgress");
 const SubSection = require("../models/SubSection");
 
 exports.updateCourseProgress = async (req, res) => {
-    console.log(req.body);
+    console.log(req.body, req.user.id);
     try {
         const { courseId, subSectionId } = req.body;
         const userId = req.user.id;
@@ -15,9 +15,7 @@ exports.updateCourseProgress = async (req, res) => {
         console.log("validation subsection");
 
         // check for old entery
-        const courseProgress = await CourseProgress.findOne({
-            courseId:courseId,userId:userId
-        })
+        const courseProgress = await CourseProgress.findOne({ courseId :courseId});
 
         if (!courseProgress) {
             console.log("course progress does not exist");

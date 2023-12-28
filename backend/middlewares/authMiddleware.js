@@ -13,12 +13,12 @@ exports.auth = async (req, res, next) => {
         // check json web token
         // console.log(req.cookies.token);
         // extract token
-         console.log("BEFORE ToKEN EXTRACTION");
+        //  console.log("BEFORE TOKEN EXTRACTION");
         //extract token
         const token = req.cookies.token 
                         || req.body.token 
                         || req.header("Authorization").replace("Bearer ", "");
-        console.log("AFTER ToKEN EXTRACTION");
+        // console.log("AFTER TOKEN EXTRACTION");
 
         // if token is missing , then return response
         // console.log("auth-token",token);

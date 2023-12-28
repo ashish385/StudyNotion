@@ -384,6 +384,7 @@ export const markLectureAsComplete = async (data, token) => {
     if (!response.data.message) {
       throw new Error(response.data.error)
     }
+    
     toast.success("Lecture Completed")
     result = true
   } catch (error) {

@@ -38,7 +38,7 @@ exports.capturePayment = async (req, res) => {
         });
       }
 
-      const uid = mongoose.Types.ObjectId(userId);
+      const uid = new mongoose.Types.ObjectId(userId);
       if (course.studentsEnrolled.includes(uid)) {
         return res.status(200).json({
           success: true,
@@ -80,14 +80,14 @@ exports.capturePayment = async (req, res) => {
 
 // verify payment
 exports.verifyPayment = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const razorpay_order_id = req.body?.razorpay_order_id;
     const razorpay_payment_id = req.body?.razorpay_payment_id;
     const razorpay_signature = req.body?.razorpay_signature;
     const courses = req.body?.courses;
     const userId = req.user.id;
-    console.log("courses", courses);
+    // console.log("courses", courses);
 
     if (
       !razorpay_order_id ||
@@ -108,14 +108,14 @@ exports.verifyPayment = async (req, res) => {
       .update(body.toString())
           .digest("hex");
       
-      console.log("expectedSignature", expectedSignature);
+      // console.log("expectedSignature", expectedSignature);
 
     if (expectedSignature === razorpay_signature) {
       // enroll kardo student ko
 
       await enrolledStudent(courses, userId, res);
 
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Content-type", "application/json");
       res.status(200).json({
         success: true,
         message: "Payment varified!",
@@ -181,7 +181,7 @@ const enrolledStudent = async (courses, userId, res) => {
           .json({ success: false, message: "student not found!" });
          }
 
-        console.log("enrolledStudent", enrolledStudent);
+        // console.log("enrolledStudent", enrolledStudent);
       // student ko mail bhej do
       const emailResponse = await mailSender(
         enrolledStudent.email,
@@ -192,7 +192,7 @@ const enrolledStudent = async (courses, userId, res) => {
         )
         );  
       
-        console.log("email response",emailResponse);
+        // console.log("email response",emailResponse);
 
     } catch (error) {
       console.log(error);
