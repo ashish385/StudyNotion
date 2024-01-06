@@ -3,8 +3,8 @@
 
 const MAIN_URL = "https://studynotion-3lpw.onrender.com";
 
-const BASE_URL = MAIN_URL +"/api/v1"
-//  const BASE_URL = "http://localhost:4000/api/v1";
+// const BASE_URL = MAIN_URL +"/api/v1"
+ const BASE_URL = "http://localhost:4000/api/v1";
 
 
 // AUTH ENDPOINTS

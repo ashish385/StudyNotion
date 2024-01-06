@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { sendOtp } from "../../../services/operations/authAPI";
 import { setSignupData } from "../../../redux/slices/authSlice";
@@ -203,6 +203,12 @@ function SignupForm() {
           Create Account
         </button>
       </form>
+      <div className=" mt-5 text-center text-richblack-200">
+        <span>Already have an account?</span>{" "}
+        <Link to={"/login"} className="hover:underline hover:text-blue-500 ml-2">
+          Log In
+        </Link>
+      </div>
     </div>
   );
 }
